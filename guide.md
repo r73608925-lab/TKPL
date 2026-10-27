@@ -62,6 +62,7 @@ Welcome to the official **TKPL Player Registration Portal & Organizer Dashboard*
 By default, the app works immediately on your computer using local browser storage (with a **Reset Demo Data** button in the Admin bar). When you are ready to go live on the internet:
 
 1. Create a free project at [supabase.com](https://supabase.com).
-2. Open the **SQL Editor** in your Supabase dashboard, paste the contents of [`supabase/migrations/0001_tkpl_schema_and_rls.sql`](file:///c:/Users/liter/Desktop/TKPL/supabase/migrations/0001_tkpl_schema_and_rls.sql) and [`supabase/seed.sql`](file:///c:/Users/liter/Desktop/TKPL/supabase/seed.sql), and click **Run**.
+2. Open the **SQL Editor** in your Supabase dashboard, paste the contents of [`supabase/migrations/0001_tkpl_schema_and_rls.sql`](file:///c:/Users/liter/Desktop/TKPL/supabase/migrations/0001_tkpl_schema_and_rls.sql) and [`supabase/admin_setup.sql`](file:///c:/Users/liter/Desktop/TKPL/supabase/admin_setup.sql) (after creating the admin logins), and click **Run**.
 3. Copy `.env.example` to `.env.local` in this folder and paste your **Supabase Project URL** and **Anon Public Key**.
 4. Deploy the folder to **Cloudflare Pages** (`npm run build` -> output directory `dist`).
+
