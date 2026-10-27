@@ -57,11 +57,37 @@ Welcome to the official **TKPL Player Registration Portal & Organizer Dashboard*
 
 ---
 
-## 4. Connecting to Cloud Supabase for Production Launch
+## 4. Deploying to Vercel (Free Hosting)
 
-By default, the app works immediately on your computer using local browser storage (with a **Reset Demo Data** button in the Admin bar). When you are ready to go live on the internet:
+You can deploy the app to Vercel right away without needing Supabase first. It will run in local demo mode until you add your database keys:
 
-1. Create a free project at [supabase.com](https://supabase.com).
-2. Open the **SQL Editor** in your Supabase dashboard, paste the contents of [`supabase/migrations/0001_tkpl_schema_and_rls.sql`](file:///c:/Users/liter/Desktop/TKPL/supabase/migrations/0001_tkpl_schema_and_rls.sql) and [`supabase/seed.sql`](file:///c:/Users/liter/Desktop/TKPL/supabase/seed.sql), and click **Run**.
-3. Copy `.env.example` to `.env.local` in this folder and paste your **Supabase Project URL** and **Anon Public Key**.
-4. Deploy the folder to **Cloudflare Pages** (`npm run build` -> output directory `dist`).
+1. Double-click `scripts\push-to-github.bat` to make sure all your latest files are on GitHub.
+2. Go to **[vercel.com](https://vercel.com)** and log in (sign in with your GitHub account).
+3. Click **"Add New..."** -> **"Project"**.
+4. Find and import your repository: **`r73608925-lab/TKPL`**.
+5. Vercel will automatically detect **Vite**. Keep all default build settings:
+   - Framework Preset: `Vite`
+   - Build Command: `npm run build`
+   - Output Directory: `dist`
+6. Click **Deploy**. Your website will be live on a free `vercel.app` link within 1 minute!
+
+---
+
+## 5. Connecting to Supabase Cloud Database (When You Are Ready)
+
+The website works immediately out-of-the-box. When you want real player registrations and photos saved in the cloud:
+
+1. Create a free account and project at **[supabase.com](https://supabase.com)**.
+2. In your Supabase Dashboard, click **SQL Editor** on the left menu.
+3. Open [`supabase/migrations/0001_tkpl_schema_and_rls.sql`](file:///c:/Users/liter/Desktop/TKPL/supabase/migrations/0001_tkpl_schema_and_rls.sql), copy everything, paste it into the Supabase SQL Editor, and click **Run**. This creates all tables, security policies, and photo storage.
+4. Under **Authentication** -> **Users**, invite or sign up organizer logins for Mansoor and Sunil.
+5. In the SQL Editor, run [`supabase/admin_setup.sql`](file:///c:/Users/liter/Desktop/TKPL/supabase/admin_setup.sql) with their exact emails to give them Super Admin rights.
+6. In Supabase, go to **Project Settings** -> **API**, copy:
+   - **Project URL**
+   - **anon public key**
+7. In Vercel, go to **Settings** -> **Environment Variables** and add:
+   - `VITE_SUPABASE_URL` = your Supabase URL
+   - `VITE_SUPABASE_ANON_KEY` = your Supabase anon key
+8. For testing on your laptop, create `.env.local` in this folder with the same two keys.
+
+

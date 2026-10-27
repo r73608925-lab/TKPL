@@ -1,94 +1,92 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Cricket, PhoneCall, ShieldCheck, YoutubeLogo } from '@phosphor-icons/react';
+import { Link, useLocation } from 'react-router-dom';
+import { ShieldCheck, YoutubeLogo } from '@phosphor-icons/react';
 import { useTournament } from '../context/TournamentContext';
+import { formatInrFromPaise } from '../lib/validation';
+import { BrandMark } from './BrandLogo';
+import { OrganizerStrip } from './OrganizerStrip';
 
 export const Footer: React.FC = () => {
   const { settings } = useTournament();
+  const location = useLocation();
+  const feeFormatted = formatInrFromPaise(settings.fee_paise);
+  const compact = location.pathname.startsWith('/admin');
+
+  if (compact) {
+    return (
+      <footer className="border-t border-brand-line/80 bg-brand-ink px-4 py-6 text-brand-muted sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 text-xs sm:flex-row">
+          <div className="flex items-center gap-2">
+            <BrandMark size={24} />
+            <span className="font-semibold text-zinc-300">{settings.tournament_name}</span>
+          </div>
+          <p>© {new Date().getFullYear()} · New Kadapa District &amp; Old Kadapa District players only</p>
+        </div>
+      </footer>
+    );
+  }
 
   return (
-    <footer className="border-t-2 border-lime-400/30 bg-zinc-950 py-12 text-zinc-300">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+    <footer className="border-t border-brand-line/80 bg-brand-ink px-4 py-12 text-brand-muted sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl">
+        <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr_1.4fr]">
           <div>
-            <div className="flex items-center gap-2.5 text-zinc-100">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-400 via-lime-400 to-emerald-500 text-zinc-950">
-                <Cricket size={20} weight="fill" />
-              </span>
-              <span className="font-black italic tracking-tight text-lg text-white">
+            <div className="flex items-center gap-2.5">
+              <BrandMark size={36} />
+              <span className="font-display text-sm leading-tight font-black tracking-tight text-white">
                 {settings.tournament_name}
               </span>
             </div>
-            <p className="mt-3 text-sm font-bold text-yellow-300">
-              Mansoor · Sultan Sports (Kadapa)
-            </p>
-            <p className="mt-1 text-sm font-bold text-lime-300">
-              Sunil · NR Sports (Vempalli)
-            </p>
-            <div className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-red-500/40 bg-red-600/15 px-3 py-1 text-xs font-extrabold text-red-300">
-              <YoutubeLogo size={16} weight="fill" className="text-red-500" />
-              <span>All Matches Live on YouTube</span>
+            <p className="mt-4 max-w-xs text-xs leading-relaxed">{settings.privacy_notice}</p>
+            <div className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-brand-line px-3 py-1 text-[11px] font-semibold text-zinc-300">
+              <YoutubeLogo size={15} weight="fill" className="text-brand-red" />
+              <span>All matches live on YouTube</span>
             </div>
           </div>
 
           <div>
-            <h3 className="text-xs font-black uppercase tracking-wider text-yellow-300">
-              Player &amp; Organizer Portal
+            <h3 className="text-[10px] font-semibold tracking-[0.22em] text-zinc-400 uppercase">
+              Quick links
             </h3>
-            <ul className="mt-3 space-y-2 text-sm font-semibold">
+            <ul className="mt-3 space-y-2 text-sm">
               <li>
-                <Link to="/register" className="hover:text-lime-300 transition">
-                  Register Player (@ ₹399/-)
+                <Link to="/register" className="transition hover:text-brand-lime">
+                  Register ({feeFormatted}/-)
                 </Link>
               </li>
               <li>
-                <Link to="/check-status" className="hover:text-lime-300 transition">
-                  Check Registration &amp; Payment Status
+                <Link to="/check-status" className="transition hover:text-brand-lime">
+                  Check status
                 </Link>
               </li>
               <li>
                 <Link
                   to="/admin/login"
-                  className="hover:text-amber-300 transition inline-flex items-center gap-1.5"
+                  className="inline-flex items-center gap-1.5 transition hover:text-brand-yellow"
                 >
-                  <ShieldCheck size={16} weight="fill" className="text-amber-400" />
-                  <span>Organizer Desk (Mansoor &amp; Sunil)</span>
+                  <ShieldCheck size={14} weight="fill" />
+                  <span>Organizer desk</span>
                 </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="text-xs font-black uppercase tracking-wider text-lime-300">
-              Official Organizer Contact Numbers
+            <h3 className="text-[10px] font-semibold tracking-[0.22em] text-zinc-400 uppercase">
+              Organizers
             </h3>
-            <div className="mt-3 space-y-2 text-sm">
-              <a
-                href="tel:9110744945"
-                className="flex items-center gap-2 font-mono font-bold text-amber-300 hover:underline"
-              >
-                <PhoneCall size={17} weight="fill" />
-                <span>Mansoor (Sultan Sports Kadapa): 9110744945</span>
-              </a>
-              <a
-                href="tel:8919155512"
-                className="flex items-center gap-2 font-mono font-bold text-lime-300 hover:underline"
-              >
-                <PhoneCall size={17} weight="fill" />
-                <span>Sunil (NR Sports Vempalli): 8919155512</span>
-              </a>
+            <div className="mt-3">
+              <OrganizerStrip compact />
             </div>
-            <p className="mt-3 text-xs text-zinc-400 leading-relaxed">
-              {settings.privacy_notice}
-            </p>
           </div>
         </div>
 
-        <div className="mt-10 border-t border-zinc-900 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-400">
+        <div className="mt-10 flex flex-col items-center justify-between gap-2 border-t border-brand-line/70 pt-6 text-[11px] sm:flex-row">
           <p>
-            © {new Date().getFullYear()} {settings.tournament_name}. Organized by Mansoor (Sultan Sports) &amp; Sunil (NR Sports).
+            © {new Date().getFullYear()} {settings.tournament_name}. Organized by Mansoor (Sultan
+            Sports) &amp; Sunil (NR Sports).
           </p>
-          <p>New Kadapa District &amp; Old Kadapa District Players Only</p>
+          <p>New Kadapa District &amp; Old Kadapa District players only</p>
         </div>
       </div>
     </footer>

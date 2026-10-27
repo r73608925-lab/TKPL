@@ -33,3 +33,8 @@ pnpm-debug.log*
 # Local planning doc and build cache (not part of the app)
 *.docx
 *.tsbuildinfo
+
+# Local agent/tool state
+.kilo/
+.playwright-cli/
+kilo-*.png
