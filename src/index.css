@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+@theme {
+  --color-brand-lime: #b6ff2e;
+  --color-brand-yellow: #ffd21e;
+  --color-brand-red: #e11d48;
+  --color-brand-ink: #070708;
+  --color-brand-surface: #101014;
+  --color-brand-surface-2: #17171c;
+  --color-brand-line: #26262d;
+  --color-brand-muted: #9d9da8;
+
+  --font-display: 'Segoe UI Black', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+}
+
 @layer base {
   :root {
     color-scheme: dark;
@@ -9,5 +22,46 @@
     background-color: #09090b;
     color: #f4f4f5;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+}
+
+@layer utilities {
+  .brand-text-gradient {
+    background-image: linear-gradient(100deg, var(--color-brand-yellow), var(--color-brand-lime) 55%, var(--color-brand-yellow));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .brand-beam {
+    background: linear-gradient(
+      to bottom,
+      rgb(255 255 255 / 0.16),
+      rgb(182 255 46 / 0.07) 45%,
+      transparent 100%
+    );
+    filter: blur(2px);
+  }
+}
+
+@keyframes brand-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotateZ(0deg);
+  }
+  50% {
+    transform: translate3d(0, -12px, 0) rotateZ(-0.35deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .brand-hero-float {
+    animation: brand-float 11s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-hero-float {
+    animation: none;
   }
 }
