@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>T-KPL · Kadapa District Premier League (Mansoor & Sunil)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #07090e;
+      color: #f8fafc;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 16px rgba(250, 204, 21, 0.4); }
+      50% { transform: scale(1.015); box-shadow: 0 0 24px rgba(132, 204, 22, 0.65); }
+    }
+    .animate-glow {
+      animation: pulseGlow 2.4s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#07090e] text-white pb-24">
+
+  <!-- Hidden file inputs so you can tap either Organizer Photo on your phone to set Mansoor's or Sunil's real photo! -->
+  <input id="upload-mansoor-photo" type="file" accept="image/*" class="hidden" onchange="handleOrganizerPhoto(event, 'left')" />
+  <input id="upload-sunil-photo" type="file" accept="image/*" class="hidden" onchange="handleOrganizerPhoto(event, 'right')" />
+
+  <!-- ========================================================================
+       1. TOP DUAL-ORGANIZER BRAND HEADER (PERFECT 50/50 SYMMETRICAL ALIGNMENT)
+       Left: MANSOOR · SULTAN SPORTS KADAPA | Right: SUNIL · NR SPORTS VEMPALLI
+       ======================================================================== -->
+  <header class="sticky top-0 z-50 shadow-2xl bg-zinc-950">
+    <!-- Thin Crown Accent Strip -->
+    <div class="bg-gradient-to-r from-red-600 via-amber-500 to-red-600 px-3 py-0.5 text-center">
+      <p class="text-[9px] font-black uppercase tracking-[0.18em] text-zinc-950">
+        👑 T-KPL OFFICIAL ORGANIZERS · TAP PHOTO TO SET PICTURE 👑
+      </p>
+    </div>
+
+    <!-- Strict 2-Column Equal Grid (Never clips or overflows on any phone screen) -->
+    <div class="bg-gradient-to-r from-amber-400 via-yellow-300 to-lime-400 p-1.5 border-b-2 border-red-600">
+      <div class="mx-auto max-w-4xl grid grid-cols-2 gap-1.5">
+
+        <!-- LEFT CARD: MANSOOR · SULTAN SPORTS KADAPA -->
+        <div class="flex items-center gap-2 rounded-xl bg-zinc-950/95 p-2 border border-amber-400/60 shadow-md min-w-0">
+          <!-- Organizer Photo Avatar (Tap to change photo on phone) -->
+          <button
+            type="button"
+            onclick="document.getElementById('upload-mansoor-photo').click()"
+            title="Tap to upload Mansoor's photo"
+            class="relative h-11 w-11 sm:h-12 sm:w-12 shrink-0 rounded-full border-2 border-amber-400 bg-zinc-900 overflow-hidden shadow focus:outline-none"
+          >
+            <img
+              id="ui-left-photo"
+              src=""
+              alt="Mansoor - Sultan Sports"
+              class="h-full w-full object-cover"
+            />
+            <span class="absolute bottom-0 inset-x-0 bg-amber-400/90 text-[7px] font-black uppercase text-zinc-950 leading-tight">
+              📷
+            </span>
+          </button>
+
+          <!-- Organizer Details -->
+          <div class="min-w-0 flex-1 leading-tight">
+            <div class="flex items-center gap-1">
+              <span id="ui-left-person" class="text-xs sm:text-sm font-black uppercase tracking-tight text-yellow-300 truncate">
+                MANSOOR
+              </span>
+            </div>
+            <span id="ui-left-brand" class="block text-[10px] sm:text-xs font-extrabold text-white truncate">
+              SULTAN SPORTS
+            </span>
+            <span class="block text-[9px] font-bold uppercase tracking-wider text-amber-300/90 truncate">
+              Kadapa
+            </span>
+            <a
+              id="ui-left-phone-link"
+              href="tel:9110744945"
+              class="mt-0.5 inline-flex items-center gap-1 font-mono text-[10px] font-black text-lime-300"
+            >
+              <span>📞</span>
+              <span id="ui-left-phone">9110744945</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- RIGHT CARD: SUNIL · NR SPORTS VEMPALLI -->
+        <div class="flex items-center justify-between gap-2 rounded-xl bg-zinc-950/95 p-2 border border-lime-400/60 shadow-md min-w-0">
+          <!-- Organizer Details -->
+          <div class="min-w-0 flex-1 text-right leading-tight">
+            <div class="flex items-center justify-end gap-1">
+              <span id="ui-right-person" class="text-xs sm:text-sm font-black uppercase tracking-tight text-lime-300 truncate">
+                SUNIL
+              </span>
+            </div>
+            <span id="ui-right-brand" class="block text-[10px] sm:text-xs font-extrabold text-white truncate">
+              NR SPORTS
+            </span>
+            <span class="block text-[9px] font-bold uppercase tracking-wider text-lime-300/90 truncate">
+              Vempalli
+            </span>
+            <a
+              id="ui-right-phone-link"
+              href="tel:8919155512"
+              class="mt-0.5 inline-flex items-center justify-end gap-1 font-mono text-[10px] font-black text-amber-300"
+            >
+              <span>📞</span>
+              <span id="ui-right-phone">8919155512</span>
+            </a>
+          </div>
+
+          <!-- Organizer Photo Avatar (Tap to change photo on phone) -->
+          <button
+            type="button"
+            onclick="document.getElementById('upload-sunil-photo').click()"
+            title="Tap to upload Sunil's photo"
+            class="relative h-11 w-11 sm:h-12 sm:w-12 shrink-0 rounded-full border-2 border-lime-400 bg-zinc-900 overflow-hidden shadow focus:outline-none"
+          >
+            <img
+              id="ui-right-photo"
+              src=""
+              alt="Sunil - NR Sports"
+              class="h-full w-full object-cover"
+            />
+            <span class="absolute bottom-0 inset-x-0 bg-lime-400/90 text-[7px] font-black uppercase text-zinc-950 leading-tight">
+              📷
+            </span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SCREEN SWITCHER BAR (Tap any tab on your phone) -->
+    <div class="bg-zinc-950/95 backdrop-blur-md border-b border-lime-400/30 px-2.5 py-2">
+      <div class="mx-auto max-w-4xl flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+        <button onclick="showScreen('home')" id="tab-home" class="screen-tab shrink-0 rounded-xl px-3 py-1.5 text-xs font-black transition">
+          1. Home &amp; Prizes
+        </button>
+        <button onclick="showScreen('franchise')" id="tab-franchise" class="screen-tab shrink-0 rounded-xl px-3 py-1.5 text-xs font-black transition">
+          2. Franchise (తెలుగు)
+        </button>
+        <button onclick="showScreen('register')" id="tab-register" class="screen-tab shrink-0 rounded-xl px-3 py-1.5 text-xs font-black transition">
+          3. ₹399 Register
+        </button>
+        <button onclick="showScreen('status')" id="tab-status" class="screen-tab shrink-0 rounded-xl px-3 py-1.5 text-xs font-black transition">
+          4. Check Status
+        </button>
+        <button onclick="showScreen('admin')" id="tab-admin" class="screen-tab shrink-0 rounded-xl px-3 py-1.5 text-xs font-black transition">
+          5. Organizer Desk
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       MAIN MOBILE VIEWPORT CONTAINER
+       ======================================================================== -->
+  <main class="mx-auto w-full max-w-4xl flex-1 px-3.5 pt-4 space-y-6">
+
+    <!-- ======================================================================
+         SCREEN 1: PUNCHY & COLOURFUL HOME PAGE
+         ====================================================================== -->
+    <section id="screen-home" class="space-y-5">
+      <!-- Dynamic Stadium Floodlight Hero Card -->
+      <div class="relative overflow-hidden rounded-3xl border-2 border-yellow-400/70 bg-gradient-to-br from-lime-950 via-zinc-950 to-red-950 p-5 sm:p-7 shadow-2xl">
+        <!-- Decorative Colour Glows -->
+        <div class="pointer-events-none absolute -top-12 -left-12 h-44 w-44 rounded-full bg-yellow-400/30 blur-2xl"></div>
+        <div class="pointer-events-none absolute -bottom-12 -right-12 h-44 w-44 rounded-full bg-lime-400/30 blur-2xl"></div>
+
+        <div class="relative z-10 space-y-4">
+          <!-- Top Pills -->
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="rounded-full bg-gradient-to-r from-red-600 to-orange-500 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-white shadow">
+              🔥 Gully Cricket to Big Stage
+            </span>
+            <span class="rounded-full border border-yellow-300/60 bg-yellow-400/15 px-3 py-1 text-[11px] font-black uppercase text-yellow-300">
+              ⚡ Guru Laser Ball League
+            </span>
+          </div>
+
+          <!-- Giant T-KPL Title (With proper space between T-KPL and KADAPA) -->
+          <div>
+            <p class="text-xs font-black uppercase tracking-widest text-lime-300">
+              Tennis Ball Kadapa District Premier League
+            </p>
+            <h1 class="mt-1 text-4xl sm:text-6xl font-black italic tracking-tight leading-none flex flex-wrap items-baseline gap-x-2.5">
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-400 to-orange-400">
+                T-KPL
+              </span>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-lime-300 via-emerald-400 to-cyan-300">
+                KADAPA
+              </span>
+            </h1>
+          </div>
+
+          <!-- District Eligibility Callout -->
+          <div class="rounded-2xl border-2 border-lime-400/50 bg-zinc-950/85 p-3.5 shadow-inner">
+            <p class="text-xs sm:text-sm font-extrabold text-yellow-300 leading-snug">
+              📍 New Kadapa District &amp; Old Kadapa District Players Allowed Only!
+            </p>
+            <p class="mt-1 text-xs text-zinc-200 leading-relaxed">
+              Players picked by official <strong>Auction Process</strong> · Limited Franchises Invited · All matches played in Kadapa!
+            </p>
+          </div>
+
+          <!-- Hurry Up ₹399 Registration CTA + Franchise Info Button (Single-line clean fit) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+            <button
+              onclick="showScreen('register')"
+              class="animate-glow w-full rounded-2xl bg-gradient-to-r from-yellow-400 via-lime-400 to-emerald-400 py-3.5 px-4 text-sm sm:text-base font-black uppercase text-zinc-950 shadow-xl active:scale-95"
+            >
+              🏏 HURRY UP! REGISTER @ <span id="ui-hero-fee">₹399/-</span>
+            </button>
+            <button
+              onclick="showScreen('franchise')"
+              class="w-full rounded-2xl border-2 border-amber-400 bg-gradient-to-r from-red-600 to-orange-600 py-3.5 px-4 text-sm font-black uppercase text-white shadow-lg active:scale-95"
+            >
+              👑 FRANCHISE RULES (తెలుగు) →
+            </button>
+          </div>
+
+          <!-- YouTube Live Streaming Banner -->
+          <div class="flex items-center justify-between rounded-xl border border-red-500/50 bg-red-950/60 px-3.5 py-2.5 text-xs font-extrabold text-white">
+            <span class="flex items-center gap-2">
+              <span class="inline-block h-2.5 w-2.5 rounded-full bg-red-500 animate-ping"></span>
+              <span>▶ YouTube LIVE STREAMING</span>
+            </span>
+            <span class="text-yellow-300 font-black">ALL MATCHES LIVE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MEGA PRIZE POOL CARDS (2,00,000 / 1,50,000 / 5,000) -->
+      <div class="space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-1">
+          <h2 class="text-lg sm:text-xl font-black uppercase italic text-yellow-300">
+            🏆 Mega Championship Prizes
+          </h2>
+          <span class="text-[11px] font-bold text-lime-300">స్పాన్సర్ వస్తే ప్రైజ్ మని పెంచబడును</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <!-- 1st Prize -->
+          <div class="rounded-2xl border-2 border-yellow-400 bg-gradient-to-br from-yellow-500/25 via-amber-950/60 to-zinc-950 p-4 shadow-lg">
+            <span class="inline-block rounded-md bg-yellow-400 px-2.5 py-0.5 text-[10px] font-black uppercase text-zinc-950">
+              🥇 1st Prize · ఫస్ట్ ప్రైజ్
+            </span>
+            <p class="mt-2 text-3xl font-black text-yellow-300">₹2,00,000/-</p>
+            <p class="text-xs font-bold text-white mt-0.5">+ Grand Championship Trophy</p>
+          </div>
+
+          <!-- 2nd Prize -->
+          <div class="rounded-2xl border-2 border-lime-400 bg-gradient-to-br from-lime-500/25 via-emerald-950/60 to-zinc-950 p-4 shadow-lg">
+            <span class="inline-block rounded-md bg-lime-400 px-2.5 py-0.5 text-[10px] font-black uppercase text-zinc-950">
+              🥈 2nd Prize · సెకండ్ ప్రైజ్
+            </span>
+            <p class="mt-2 text-3xl font-black text-lime-300">₹1,50,000/-</p>
+            <p class="text-xs font-bold text-white mt-0.5">+ Runners-Up Trophy</p>
+          </div>
+
+          <!-- Man of the Series & Match -->
+          <div class="rounded-2xl border-2 border-orange-500 bg-gradient-to-br from-red-500/25 via-orange-950/60 to-zinc-950 p-4 shadow-lg">
+            <span class="inline-block rounded-md bg-orange-500 px-2.5 py-0.5 text-[10px] font-black uppercase text-white">
+              ⭐ Man of the Series
+            </span>
+            <p class="mt-2 text-3xl font-black text-orange-300">₹5,000/-</p>
+            <p class="text-xs font-bold text-yellow-200 mt-0.5">+ Man of the Match Every Game!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PLAYER BASE PRICES & KIT PERKS STRIP -->
+      <div class="rounded-3xl border-2 border-cyan-400/50 bg-gradient-to-r from-cyan-950/60 via-zinc-900 to-purple-950/60 p-5 space-y-3">
+        <h3 class="text-base font-black uppercase text-cyan-300">
+          ⚡ Auction Base Prices &amp; Free Player Kit
+        </h3>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center">
+          <div class="rounded-xl bg-zinc-950/90 border border-cyan-500/30 p-3">
+            <span class="block text-[10px] font-bold uppercase text-zinc-400">Best Batsman</span>
+            <span class="text-lg font-black text-yellow-300">₹1,000/-</span>
+            <span class="block text-[10px] text-zinc-400">Base Price</span>
+          </div>
+          <div class="rounded-xl bg-zinc-950/90 border border-cyan-500/30 p-3">
+            <span class="block text-[10px] font-bold uppercase text-zinc-400">Best Bowler</span>
+            <span class="text-lg font-black text-lime-300">₹1,000/-</span>
+            <span class="block text-[10px] text-zinc-400">Base Price</span>
+          </div>
+          <div class="rounded-xl bg-zinc-950/90 border border-amber-500/40 p-3">
+            <span class="block text-[10px] font-bold uppercase text-amber-300">All-Rounder</span>
+            <span class="text-lg font-black text-amber-300">₹2,000/-</span>
+            <span class="block text-[10px] text-zinc-400">Base Price</span>
+          </div>
+          <div class="rounded-xl bg-zinc-950/90 border border-fuchsia-500/40 p-3">
+            <span class="block text-[10px] font-bold uppercase text-fuchsia-300">Every Player Gets</span>
+            <span class="text-sm font-black text-white">1 Dress Set</span>
+            <span class="block text-[10px] text-lime-300 font-bold">+ 1 Extra T-Shirt!</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCREEN 2: FRANCHISE OWNERS GUIDELINES (Bilingual తెలుగు + English)
+         ====================================================================== -->
+    <section id="screen-franchise" class="hidden space-y-5">
+      <div class="rounded-3xl border-2 border-amber-400 bg-gradient-to-br from-amber-950/60 via-zinc-900 to-zinc-950 p-5 space-y-4">
+        <div>
+          <span class="rounded-lg bg-amber-400 px-2.5 py-1 text-[10px] font-black uppercase text-zinc-950">
+            Guru Laser Ball Kadapa Premier League
+          </span>
+          <h1 class="mt-2 text-2xl sm:text-3xl font-black text-white">
+            Franchise Owners Guidelines (టీం ఓనర్స్ నిబంధనలు)
+          </h1>
+        </div>
+
+        <!-- Purse Breakdown Visual Bar -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center">
+          <div class="rounded-2xl border border-yellow-400/50 bg-zinc-950 p-3">
+            <span class="block text-[10px] font-bold uppercase text-zinc-400">Team Deposit</span>
+            <span class="text-xl font-black text-yellow-300">₹1.60L</span>
+            <span class="block text-[10px] text-amber-200">3-Year Agreement</span>
+          </div>
+          <div class="rounded-2xl border border-lime-400/50 bg-zinc-950 p-3">
+            <span class="block text-[10px] font-bold uppercase text-zinc-400">Auction Purse</span>
+            <span class="text-xl font-black text-lime-300">₹80,000</span>
+            <span class="block text-[10px] text-lime-200">From 1.6L Deposit</span>
+          </div>
+          <div class="rounded-2xl border border-orange-400/50 bg-zinc-950 p-3">
+            <span class="block text-[10px] font-bold uppercase text-zinc-400">Iconic + Captain</span>
+            <span class="text-xl font-black text-orange-300">10K + 10K</span>
+            <span class="block text-[10px] text-orange-200">60K for Rest of Squad</span>
+          </div>
+          <div class="rounded-2xl border border-cyan-400/50 bg-zinc-950 p-3">
+            <span class="block text-[10px] font-bold uppercase text-zinc-400">Squad Size</span>
+            <span class="text-xl font-black text-cyan-300">15 Players</span>
+            <span class="block text-[10px] text-cyan-200">Unused 80K Refunded</span>
+          </div>
+        </div>
+
+        <!-- All Bullet Points in Telugu + English -->
+        <div class="space-y-3">
+          <div class="rounded-2xl border border-amber-400/40 bg-zinc-950/90 p-4">
+            <span class="text-xs font-black text-yellow-300">1. ₹1.6L Franchise Deposit &amp; 3-Year Agreement</span>
+            <p class="mt-1 text-sm font-bold text-lime-200">
+              • టీం రిజిస్ట్రేషన్ తీసుకోవడానికి 1.6L డిపాజిట్ చేయాలి. 3 ఇయర్స్ టోర్నమెంట్ లో అగ్రిమెంట్ ఉంటుంది. ఈ సంవత్సరం నుండి ప్రతి సంవత్సరం టోర్నమెంట్ నిర్వహించడం జరుగుతుంది.
+            </p>
+            <p class="mt-1 text-xs text-zinc-300">
+              Pay ₹1,60,000 deposit for team registration with a 3-year agreement. Conducted annually every year starting this season.
+            </p>
+          </div>
+
+          <div class="rounded-2xl border border-lime-400/40 bg-zinc-950/90 p-4">
+            <span class="text-xs font-black text-lime-300">2. ₹80K Player Purse, Iconic (10K), Captain (10K) &amp; Remaining 60K</span>
+            <p class="mt-1 text-sm font-bold text-lime-200">
+              • మీరు డిపాజిట్ చేసిన 1.6L లో నుంచి 80K ప్లేయర్స్ సేల్ చేయవచ్చు. ప్రతి టీంలో ఒక ఐకానిక్ ప్లేయర్ 10K మరియు కెప్టెన్ 10K తీసుకోవచ్చు. మరియు మిగిలిన 60K లో మిగిలిన ప్లేయర్స్ ని తీసుకోవలెను.
+            </p>
+            <p class="mt-1 text-xs text-zinc-300">
+              Out of your ₹1.6L deposit, ₹80,000 can be spent on players: ₹10,000 for 1 Iconic Player + ₹10,000 for 1 Captain + ₹60,000 for the remaining squad players.
+            </p>
+          </div>
+
+          <div class="rounded-2xl border border-cyan-400/40 bg-zinc-950/90 p-4">
+            <span class="text-xs font-black text-cyan-300">3. 15 Players per Team, Base Prices &amp; Free Dress + T-Shirt</span>
+            <p class="mt-1 text-sm font-bold text-lime-200">
+              • ప్రతి టీం కి 15 మంది ప్లేయర్స్. బెస్ట్ బ్యాట్స్మన్ మరియు బెస్ట్ బౌలర్ కి 1000/- ఆల్ రౌండర్కి 2000/- బేస్ ప్రైస్. ప్రతి ప్లేయర్ కి 1 సెట్ డ్రెస్ మరియు 1 టీషర్ట్ ఇవ్వబడును.
+            </p>
+            <p class="mt-1 text-xs text-zinc-300">
+              15 players per team. Base Prices: ₹1,000/- for Best Batsman &amp; Best Bowler, ₹2,000/- for All-Rounder. Every player gets 1 full set dress + 1 extra T-shirt.
+            </p>
+          </div>
+
+          <div class="rounded-2xl border border-fuchsia-400/40 bg-zinc-950/90 p-4">
+            <span class="text-xs font-black text-fuchsia-300">4. 100% Team Sponsor Retention &amp; Unspent Purse Refund</span>
+            <p class="mt-1 text-sm font-bold text-lime-200">
+              • ఎవరైనా మీ టీం కి స్పాన్సర్ ఇస్తే ఆ అమౌంట్ మీరే తీసుకోవచ్చు. 80K లో ప్లేయర్స్ తీసుకున్నాక అమౌంట్ మిగిలితే ఆ అమౌంట్ రిటర్న్ ఇవ్వబడును.
+            </p>
+            <p class="mt-1 text-xs text-zinc-300">
+              If any sponsor sponsors your team, you keep 100% of that sponsor amount. Any unspent balance left from your ₹80K purse after buying players is refunded to you!
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCREEN 3: ₹399 PLAYER REGISTRATION FORM
+         ====================================================================== -->
+    <section id="screen-register" class="hidden space-y-5">
+      <div class="rounded-3xl border-2 border-lime-400/60 bg-zinc-900/95 p-5 shadow-2xl">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
+          <div>
+            <span class="text-[11px] font-black uppercase tracking-wider text-lime-400">New &amp; Old Kadapa District Only</span>
+            <h1 class="text-xl sm:text-2xl font-black text-white">Player Registration Form</h1>
+          </div>
+          <div class="rounded-2xl bg-gradient-to-br from-yellow-400 to-lime-400 px-3.5 py-2 text-right text-zinc-950 shadow">
+            <span class="block text-[10px] font-black uppercase">Entry Fee</span>
+            <span id="ui-form-fee" class="text-lg font-black">₹399/-</span>
+          </div>
+        </div>
+
+        <div id="reg-error-box" class="hidden mt-4 rounded-xl border border-rose-500 bg-rose-950/70 p-3.5 text-xs font-bold text-rose-200"></div>
+
+        <form id="registration-form" onsubmit="handleRegisterSubmit(event)" class="mt-5 space-y-4" novalidate>
+          <div>
+            <label class="block text-xs font-bold text-yellow-300 mb-1">Full Name (For Auction Roster) *</label>
+            <input id="reg-name" type="text" required placeholder="Enter full player name" class="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3.5 py-3 text-sm text-white placeholder-zinc-500 focus:border-lime-400 focus:outline-none" />
+          </div>
+
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div>
+              <label class="block text-xs font-bold text-yellow-300 mb-1">WhatsApp / Mobile Number *</label>
+              <input id="reg-phone" type="tel" inputmode="numeric" maxlength="10" required placeholder="10-digit mobile number" class="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3.5 py-3 text-sm text-white placeholder-zinc-500 focus:border-lime-400 focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-yellow-300 mb-1">Date of Birth *</label>
+              <input id="reg-dob" type="date" required value="2000-06-15" class="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3.5 py-3 text-sm text-white focus:border-lime-400 focus:outline-none" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div>
+              <label class="block text-xs font-bold text-yellow-300 mb-1">Kadapa District Locality / Town *</label>
+              <input id="reg-locality" type="text" required placeholder="e.g. Kadapa, Vempalli, Proddatur, Rayachoti" class="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3.5 py-3 text-sm text-white placeholder-zinc-500 focus:border-lime-400 focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-yellow-300 mb-1">Playing Role &amp; Base Price *</label>
+              <select id="reg-role" class="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3.5 py-3 text-sm text-white focus:border-lime-400 focus:outline-none">
+                <option value="All-Rounder (Base ₹2,000)">All-Rounder (Base Price ₹2,000/-)</option>
+                <option value="Batter (Base ₹1,000)">Batter (Base Price ₹1,000/-)</option>
+                <option value="Bowler (Base ₹1,000)">Bowler (Base Price ₹1,000/-)</option>
+                <option value="Wicketkeeper (Base ₹1,000)">Wicketkeeper (Base Price ₹1,000/-)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Player Photo Upload -->
+          <div>
+            <label class="block text-xs font-bold text-yellow-300 mb-1">Player Photograph *</label>
+            <div class="flex items-center gap-3 rounded-xl border border-dashed border-lime-400/50 bg-zinc-950 p-3">
+              <div id="photo-preview-box" class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900 text-xs font-black text-lime-400 overflow-hidden">
+                PHOTO
+              </div>
+              <div class="flex-1">
+                <input id="reg-photo" type="file" accept="image/*" onchange="handlePhotoPreview(event)" class="block w-full text-xs text-zinc-300 file:mr-2 file:rounded-lg file:border-0 file:bg-lime-400 file:px-3 file:py-1.5 file:text-xs file:font-black file:text-zinc-950" />
+                <p class="mt-1 text-[11px] text-zinc-400">Clear front-facing photo for auction display screen.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Optional UPI Reference -->
+          <div class="rounded-2xl border border-amber-400/40 bg-amber-950/20 p-4 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-amber-300">₹399/- Fee Payment Reference</span>
+              <span id="ui-form-upi" class="font-mono text-xs font-bold text-lime-300">sultansports.tkpl@upi</span>
+            </div>
+            <input id="reg-utr" type="text" placeholder="Enter 12-digit UPI UTR or Shop Cash Receipt (or submit later)" class="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3.5 py-2.5 text-sm font-mono text-white placeholder-zinc-500" />
+          </div>
+
+          <label class="flex items-start gap-2.5 cursor-pointer pt-1">
+            <input id="reg-consent" type="checkbox" checked class="mt-1 h-4 w-4 rounded border-zinc-600 bg-zinc-950 text-lime-500" />
+            <span class="text-xs text-zinc-200 leading-relaxed">
+              I confirm I belong to New/Old Kadapa District and accept the T-KPL auction rules. *
+            </span>
+          </label>
+
+          <button type="submit" class="w-full rounded-2xl bg-gradient-to-r from-yellow-400 via-lime-400 to-emerald-400 py-4 text-sm font-black uppercase text-zinc-950 shadow-xl active:scale-95">
+            Submit Registration &amp; Get T-KPL ID →
+          </button>
+        </form>
+      </div>
+
+      <!-- Confirmation Box -->
+      <div id="registration-success-card" class="hidden rounded-3xl border-2 border-lime-400 bg-zinc-900 p-6 shadow-2xl space-y-4">
+        <span class="inline-block rounded-lg bg-lime-400 px-3 py-1 text-xs font-black uppercase text-zinc-950">
+          ✓ Registration Submitted!
+        </span>
+        <h2 id="succ-name" class="text-2xl font-black text-white">Welcome to T-KPL!</h2>
+        <div class="rounded-2xl border border-yellow-400/50 bg-zinc-950 p-4 flex items-center justify-between">
+          <div>
+            <span class="text-[10px] font-bold uppercase text-zinc-400">Your Official T-KPL Registration ID</span>
+            <p id="succ-reg-no" class="font-mono text-2xl font-black text-yellow-300">TKPL-2026-0106</p>
+          </div>
+          <button onclick="openStatusFromSuccess()" class="rounded-xl bg-lime-400 px-3.5 py-2 text-xs font-black text-zinc-950">
+            Check Status →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCREEN 4: CHECK STATUS & SUBMIT ₹399 UTR
+         ====================================================================== -->
+    <section id="screen-status" class="hidden space-y-5">
+      <div class="rounded-3xl border-2 border-yellow-400/50 bg-zinc-900/95 p-5 space-y-4">
+        <h1 class="text-xl sm:text-2xl font-black text-white">Check Player Status &amp; Submit UTR</h1>
+        <p class="text-xs text-zinc-300">
+          Tap one of the sample players below to test instant lookup on your phone:
+        </p>
+
+        <div class="flex flex-wrap gap-2">
+          <button type="button" onclick="fillLookup('TKPL-2026-0101','9848011223','1999-04-14')" class="rounded-xl border border-lime-400/50 bg-lime-950/40 px-3 py-1.5 text-xs font-extrabold text-lime-300">
+            ⚡ Syed Irfan (Auction Eligible)
+          </button>
+          <button type="button" onclick="fillLookup('TKPL-2026-0105','7989234561','1998-07-30')" class="rounded-xl border border-amber-400/50 bg-amber-950/40 px-3 py-1.5 text-xs font-extrabold text-amber-300">
+            ⚡ Harish Kumar (₹399 Pending)
+          </button>
+        </div>
+
+        <form onsubmit="handleStatusLookup(event)" class="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <input id="chk-id" type="text" required placeholder="TKPL-2026-0101" class="rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2.5 text-xs font-mono text-white" />
+          <input id="chk-phone" type="tel" required placeholder="10-digit mobile" class="rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2.5 text-xs text-white" />
+          <input id="chk-dob" type="date" required class="rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2.5 text-xs text-white" />
+          <button type="submit" class="sm:col-span-3 rounded-xl bg-gradient-to-r from-yellow-400 to-lime-400 py-3 text-xs font-black uppercase text-zinc-950">
+            Check My Status
+          </button>
+        </form>
+      </div>
+
+      <div id="status-result-box" class="hidden"></div>
+    </section>
+
+    <!-- ======================================================================
+         SCREEN 5: ORGANIZER ADMIN DESK (Mansoor & Sunil)
+         ====================================================================== -->
+    <section id="screen-admin" class="hidden space-y-5">
+      <div class="rounded-3xl border-2 border-amber-400/60 bg-zinc-900/95 p-4 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <span class="text-[10px] font-black uppercase tracking-wider text-amber-300">Mansoor (Sultan Sports) &amp; Sunil (NR Sports)</span>
+            <h1 class="text-lg sm:text-xl font-black text-white">T-KPL Organizer Control Panel</h1>
+          </div>
+          <select id="admin-role-select" onchange="handleRoleChange()" class="rounded-xl border border-lime-400/50 bg-zinc-950 px-3 py-1.5 text-xs font-extrabold text-lime-300">
+            <option value="super_admin">Super Admin (Full Control)</option>
+            <option value="registration_reviewer">Registration Reviewer</option>
+            <option value="payment_verifier">Payment Verifier (₹399 Desk)</option>
+            <option value="read_only_helper">Read-Only Helper</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+          <div class="rounded-xl bg-zinc-950 border border-zinc-800 p-2.5">
+            <span class="text-[10px] text-zinc-400 uppercase font-bold">Total Players</span>
+            <p id="kpi-total" class="text-xl font-black text-white">5</p>
+          </div>
+          <div class="rounded-xl bg-zinc-950 border border-zinc-800 p-2.5">
+            <span class="text-[10px] text-zinc-400 uppercase font-bold">Approved</span>
+            <p id="kpi-approved" class="text-xl font-black text-lime-400">2</p>
+          </div>
+          <div class="rounded-xl bg-zinc-950 border border-zinc-800 p-2.5">
+            <span class="text-[10px] text-zinc-400 uppercase font-bold">₹399 Verified</span>
+            <p id="kpi-verified-pay" class="text-xl font-black text-yellow-300">3</p>
+          </div>
+          <div class="rounded-xl bg-lime-950/30 border border-lime-400/40 p-2.5">
+            <span class="text-[10px] text-lime-300 uppercase font-bold">Auction Pool</span>
+            <p id="kpi-eligible" class="text-xl font-black text-lime-300">2</p>
+          </div>
+        </div>
+
+        <div class="flex gap-1.5 pt-1">
+          <button onclick="showAdminSubTab('players')" id="admintab-players" class="flex-1 rounded-xl py-2 text-xs font-black transition">
+            Players &amp; Pool
+          </button>
+          <button onclick="showAdminSubTab('payments')" id="admintab-payments" class="flex-1 rounded-xl py-2 text-xs font-black transition">
+            ₹399 Payments
+          </button>
+          <button onclick="showAdminSubTab('settings')" id="admintab-settings" class="flex-1 rounded-xl py-2 text-xs font-black transition">
+            Edit Organizers
+          </button>
+        </div>
+      </div>
+
+      <div id="admin-toast" class="hidden rounded-xl border border-lime-400 bg-lime-950/70 p-3 text-xs font-black text-lime-200"></div>
+
+      <div id="admin-sub-players" class="space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-extrabold text-zinc-300">Tap Approve to add to Auction Pool:</span>
+          <button onclick="exportAuctionCsv()" class="rounded-xl bg-yellow-400 px-3 py-1.5 text-xs font-black text-zinc-950">
+            ⬇ Export Auction CSV
+          </button>
+        </div>
+        <div id="admin-players-list" class="space-y-3"></div>
+      </div>
+
+      <div id="admin-sub-payments" class="hidden space-y-3">
+        <div id="admin-payments-list" class="space-y-3"></div>
+      </div>
+
+      <div id="admin-sub-settings" class="hidden">
+        <form onsubmit="handleSaveSettings(event)" class="rounded-2xl border border-zinc-800 bg-zinc-900 p-4 space-y-3">
+          <h3 class="text-sm font-black text-yellow-300">Edit Organizers, Photos &amp; Fee Live</h3>
+          <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div>
+              <label class="block text-[11px] font-bold text-amber-300 mb-1">Left Organizer Name (Sultan Sports)</label>
+              <input id="set-left-person" type="text" class="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2 text-xs text-white" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-lime-300 mb-1">Right Organizer Name (NR Sports)</label>
+              <input id="set-right-person" type="text" class="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2 text-xs text-white" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-zinc-300 mb-1">Left Brand Title</label>
+              <input id="set-left-brand" type="text" class="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2 text-xs text-white" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-zinc-300 mb-1">Right Brand Title</label>
+              <input id="set-right-brand" type="text" class="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2 text-xs text-white" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-zinc-300 mb-1">Player Registration Fee (₹)</label>
+              <input id="set-fee" type="number" class="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2 text-xs text-white" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-zinc-300 mb-1">Official UPI ID</label>
+              <input id="set-upi" type="text" class="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2 text-xs font-mono text-white" />
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2 pt-1">
+            <button type="button" onclick="document.getElementById('upload-mansoor-photo').click()" class="rounded-xl border border-amber-400/50 bg-zinc-950 px-3 py-2 text-xs font-bold text-amber-300">
+              📷 Upload Mansoor Photo
+            </button>
+            <button type="button" onclick="document.getElementById('upload-sunil-photo').click()" class="rounded-xl border border-lime-400/50 bg-zinc-950 px-3 py-2 text-xs font-bold text-lime-300">
+              📷 Upload Sunil Photo
+            </button>
+          </div>
+          <button type="submit" class="w-full rounded-xl bg-lime-400 py-3 text-xs font-black uppercase text-zinc-950">
+            Save &amp; Update Header Live
+          </button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Built-in crisp SVG portrait avatars for MANSOOR & SUNIL (can also be replaced by tapping the photo!)
+    const DEFAULT_MANSOOR_SVG = "data:image/svg+xml;utf8," + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f59e0b"/>
+            <stop offset="100%" stop-color="#dc2626"/>
+          </linearGradient>
+        </defs>
+        <rect width="120" height="120" fill="url(#g1)"/>
+        <circle cx="60" cy="42" r="22" fill="#fde68a"/>
+        <path d="M22 108c4-24 22-36 38-36s34 12 38 36" fill="#18181b"/>
+        <text x="60" y="102" text-anchor="middle" fill="#facc15" font-family="sans-serif" font-size="14" font-weight="900">MANSOOR</text>
+      </svg>
+    `);
+
+    const DEFAULT_SUNIL_SVG = "data:image/svg+xml;utf8," + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+        <defs>
+          <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#84cc16"/>
+            <stop offset="100%" stop-color="#059669"/>
+          </linearGradient>
+        </defs>
+        <rect width="120" height="120" fill="url(#g2)"/>
+        <circle cx="60" cy="42" r="22" fill="#ecfccb"/>
+        <path d="M22 108c4-24 22-36 38-36s34 12 38 36" fill="#18181b"/>
+        <text x="60" y="102" text-anchor="middle" fill="#a3e635" font-family="sans-serif" font-size="14" font-weight="900">SUNIL</text>
+      </svg>
+    `);
+
+    const INITIAL_STATE = {
+      settings: {
+        leftPerson: 'MANSOOR',
+        leftBrand: 'SULTAN SPORTS',
+        leftPhone: '9110744945',
+        leftPhoto: DEFAULT_MANSOOR_SVG,
+        rightPerson: 'SUNIL',
+        rightBrand: 'NR SPORTS',
+        rightPhone: '8919155512',
+        rightPhoto: DEFAULT_SUNIL_SVG,
+        feeRupees: 399,
+        upiId: 'sultansports.tkpl@upi'
+      },
+      activeRole: 'super_admin',
+      lastCreatedPlayer: null,
+      players: [
+        {
+          id: 'TKPL-2026-0101',
+          name: 'Syed Irfan Basha',
+          phone: '9848011223',
+          dob: '1999-04-14',
+          locality: 'Kadapa Seven Roads',
+          role: 'All-Rounder (Base ₹2,000)',
+          regStatus: 'approved',
+          payStatus: 'verified',
+          utr: '430019283746',
+          auctionStatus: 'eligible',
+          notes: 'Verified by Mansoor (Sultan Sports Kadapa).'
+        },
+        {
+          id: 'TKPL-2026-0102',
+          name: 'K. Venkata Ramana Reddy',
+          phone: '9440122334',
+          dob: '2001-08-22',
+          locality: 'Vempalli (Kadapa Dist)',
+          role: 'Batter (Base ₹1,000)',
+          regStatus: 'approved',
+          payStatus: 'verified',
+          utr: 'NR-CASH-009',
+          auctionStatus: 'eligible',
+          notes: 'Verified by Sunil (NR Sports Vempalli).'
+        },
+        {
+          id: 'TKPL-2026-0103',
+          name: 'Mohammed Toufeeq',
+          phone: '9010455667',
+          dob: '2002-11-05',
+          locality: 'Rayachoti (Old Kadapa)',
+          role: 'Bowler (Base ₹1,000)',
+          regStatus: 'under_review',
+          payStatus: 'submitted',
+          utr: '430188472910',
+          auctionStatus: 'not_reviewed',
+          notes: '₹399 UTR submitted; awaiting statement verification.'
+        },
+        {
+          id: 'TKPL-2026-0104',
+          name: 'G. Sai Charan',
+          phone: '8897633445',
+          dob: '2000-01-19',
+          locality: 'Kadapa NGO Colony',
+          role: 'Wicketkeeper (Base ₹1,000)',
+          regStatus: 'needs_correction',
+          payStatus: 'verified',
+          utr: '430199001122',
+          auctionStatus: 'not_reviewed',
+          notes: 'Please re-upload front-facing photo without sunglasses.'
+        },
+        {
+          id: 'TKPL-2026-0105',
+          name: 'P. Harish Kumar',
+          phone: '7989234561',
+          dob: '1998-07-30',
+          locality: 'Pulivendula',
+          role: 'All-Rounder (Base ₹2,000)',
+          regStatus: 'submitted',
+          payStatus: 'pending',
+          utr: '',
+          auctionStatus: 'not_reviewed',
+          notes: 'Awaiting ₹399 fee payment reference.'
+        }
+      ]
+    };
+
+    let state = JSON.parse(JSON.stringify(INITIAL_STATE));
+
+    // Load saved organizer photos if user picked them on phone
+    try {
+      const savedLeft = localStorage.getItem('tkpl_mansoor_photo');
+      const savedRight = localStorage.getItem('tkpl_sunil_photo');
+      if (savedLeft) state.settings.leftPhoto = savedLeft;
+      if (savedRight) state.settings.rightPhoto = savedRight;
+    } catch (e) {}
+
+    function handleOrganizerPhoto(e, side) {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        if (side === 'left') {
+          state.settings.leftPhoto = ev.target.result;
+          try { localStorage.setItem('tkpl_mansoor_photo', ev.target.result); } catch(err){}
+        } else {
+          state.settings.rightPhoto = ev.target.result;
+          try { localStorage.setItem('tkpl_sunil_photo', ev.target.result); } catch(err){}
+        }
+        renderAll();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function showScreen(screenId) {
+      ['home', 'franchise', 'register', 'status', 'admin'].forEach(id => {
+        document.getElementById('screen-' + id).classList.toggle('hidden', id !== screenId);
+        const tab = document.getElementById('tab-' + id);
+        if (id === screenId) {
+          tab.className = 'screen-tab shrink-0 rounded-xl px-3 py-1.5 text-xs font-black bg-gradient-to-r from-yellow-400 to-lime-400 text-zinc-950 shadow transition';
+        } else {
+          tab.className = 'screen-tab shrink-0 rounded-xl px-3 py-1.5 text-xs font-bold bg-zinc-900 text-zinc-300 border border-zinc-800 transition';
+        }
+      });
+      renderAll();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showAdminSubTab(subId) {
+      ['players', 'payments', 'settings'].forEach(id => {
+        document.getElementById('admin-sub-' + id).classList.toggle('hidden', id !== subId);
+        const btn = document.getElementById('admintab-' + id);
+        if (id === subId) {
+          btn.className = 'flex-1 rounded-xl py-2 text-xs font-black bg-lime-400 text-zinc-950 transition';
+        } else {
+          btn.className = 'flex-1 rounded-xl py-2 text-xs font-bold bg-zinc-950 text-zinc-400 border border-zinc-800 transition';
+        }
+      });
+    }
+
+    function handlePhotoPreview(e) {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        document.getElementById('photo-preview-box').innerHTML =
+          '<img src="' + ev.target.result + '" class="h-full w-full object-cover" />';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handleRegisterSubmit(e) {
+      e.preventDefault();
+      const errBox = document.getElementById('reg-error-box');
+      errBox.classList.add('hidden');
+
+      const name = document.getElementById('reg-name').value.trim();
+      const phone = document.getElementById('reg-phone').value.replace(/\D/g, '');
+      const dob = document.getElementById('reg-dob').value;
+      const locality = document.getElementById('reg-locality').value.trim();
+      const role = document.getElementById('reg-role').value;
+      const utr = document.getElementById('reg-utr').value.trim();
+
+      if (name.length < 3 || !/^[6-9][0-9]{9}$/.test(phone) || !locality) {
+        errBox.textContent = 'Please enter Full Name, a valid 10-digit Mobile Number, and Kadapa District Locality.';
+        errBox.classList.remove('hidden');
+        return;
+      }
+
+      const nextNum = 101 + state.players.length;
+      const newId = 'TKPL-2026-0' + nextNum;
+      const newPlayer = {
+        id: newId,
+        name,
+        phone,
+        dob,
+        locality,
+        role,
+        regStatus: 'submitted',
+        payStatus: utr ? 'submitted' : 'pending',
+        utr,
+        auctionStatus: 'not_reviewed',
+        notes: utr ? '₹399 UTR submitted; awaiting verification.' : 'Awaiting ₹399 payment UTR.'
+      };
+
+      state.players.unshift(newPlayer);
+      state.lastCreatedPlayer = newPlayer;
+
+      document.getElementById('succ-name').textContent = 'Welcome to T-KPL, ' + newPlayer.name + '!';
+      document.getElementById('succ-reg-no').textContent = newPlayer.id;
+      document.getElementById('registration-success-card').classList.remove('hidden');
+      renderAll();
+    }
+
+    function openStatusFromSuccess() {
+      if (state.lastCreatedPlayer) {
+        fillLookup(state.lastCreatedPlayer.id, state.lastCreatedPlayer.phone, state.lastCreatedPlayer.dob);
+      }
+      showScreen('status');
+    }
+
+    function fillLookup(id, phone, dob) {
+      document.getElementById('chk-id').value = id;
+      document.getElementById('chk-phone').value = phone;
+      document.getElementById('chk-dob').value = dob;
+      runLookup(id, phone, dob);
+    }
+
+    function handleStatusLookup(e) {
+      e.preventDefault();
+      runLookup(
+        document.getElementById('chk-id').value,
+        document.getElementById('chk-phone').value,
+        document.getElementById('chk-dob').value
+      );
+    }
+
+    function runLookup(idRaw, phoneRaw, dobRaw) {
+      const box = document.getElementById('status-result-box');
+      box.classList.remove('hidden');
+
+      const p = state.players.find(
+        item => item.id.toUpperCase() === idRaw.trim().toUpperCase() &&
+                item.phone === phoneRaw.replace(/\D/g, '') &&
+                item.dob === dobRaw.trim()
+      );
+      if (!p) {
+        box.innerHTML = `<div class="rounded-2xl border border-rose-500 bg-rose-950/60 p-4 text-xs font-bold text-rose-200">No matching player found. Check Registration ID, Mobile &amp; DOB.</div>`;
+        return;
+      }
+
+      box.innerHTML = `
+        <div class="rounded-3xl border-2 border-lime-400/50 bg-zinc-900 p-5 space-y-4">
+          <div>
+            <span class="font-mono text-xs font-black text-yellow-300">${p.id}</span>
+            <h2 class="text-xl font-black text-white">${p.name}</h2>
+            <p class="text-xs text-lime-300 font-bold">${p.locality} · ${p.role}</p>
+          </div>
+          <div class="grid grid-cols-3 gap-2 text-center text-xs">
+            <div class="rounded-xl bg-zinc-950 p-2.5 border border-zinc-800">
+              <span class="block text-[10px] text-zinc-400">Profile</span>
+              <strong class="text-cyan-300 uppercase">${p.regStatus}</strong>
+            </div>
+            <div class="rounded-xl bg-zinc-950 p-2.5 border border-zinc-800">
+              <span class="block text-[10px] text-zinc-400">₹${state.settings.feeRupees} Fee</span>
+              <strong class="text-yellow-300 uppercase">${p.payStatus}</strong>
+            </div>
+            <div class="rounded-xl bg-zinc-950 p-2.5 border border-zinc-800">
+              <span class="block text-[10px] text-zinc-400">Auction</span>
+              <strong class="text-lime-300 uppercase">${p.auctionStatus}</strong>
+            </div>
+          </div>
+          ${p.payStatus !== 'verified' ? `
+            <div class="flex gap-2 pt-2">
+              <input id="lookup-utr-input" type="text" value="${p.utr}" placeholder="Enter 12-digit UPI UTR" class="flex-1 rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2 text-xs font-mono text-white" />
+              <button onclick="saveApplicantUtr('${p.id}')" class="rounded-xl bg-yellow-400 px-4 py-2 text-xs font-black text-zinc-950">Save UTR</button>
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    function saveApplicantUtr(playerId) {
+      const val = document.getElementById('lookup-utr-input').value.trim();
+      const p = state.players.find(i => i.id === playerId);
+      if (!p || val.length < 4) return;
+      p.utr = val;
+      p.payStatus = 'submitted';
+      runLookup(p.id, p.phone, p.dob);
+      renderAll();
+    }
+
+    function handleRoleChange() {
+      state.activeRole = document.getElementById('admin-role-select').value;
+      renderAll();
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('admin-toast');
+      t.textContent = msg;
+      t.classList.remove('hidden');
+      setTimeout(() => t.classList.add('hidden'), 3000);
+    }
+
+    function adminSetPlayerStatus(playerId, newRegStatus, newAuctionStatus) {
+      if (state.activeRole !== 'super_admin' && state.activeRole !== 'registration_reviewer') {
+        alert('Only Super Admin or Registration Reviewer can approve profiles.');
+        return;
+      }
+      const p = state.players.find(i => i.id === playerId);
+      if (!p) return;
+      if (newAuctionStatus === 'eligible' && p.payStatus !== 'verified') {
+        alert('Cannot mark Auction Eligible until ₹399 payment is Verified!');
+        return;
+      }
+      p.regStatus = newRegStatus;
+      p.auctionStatus = newAuctionStatus;
+      showToast('Updated ' + p.name + ' → ' + newAuctionStatus.toUpperCase());
+      renderAll();
+    }
+
+    function adminSetPaymentStatus(playerId, newPayStatus) {
+      if (state.activeRole !== 'super_admin' && state.activeRole !== 'payment_verifier') {
+        alert('Only Super Admin or Payment Verifier can reconcile payments.');
+        return;
+      }
+      const p = state.players.find(i => i.id === playerId);
+      if (!p) return;
+      if (newPayStatus === 'verified' && !p.utr) p.utr = 'CASH-' + Math.floor(100 + Math.random()*900);
+      p.payStatus = newPayStatus;
+      showToast('₹' + state.settings.feeRupees + ' payment for ' + p.name + ' marked ' + newPayStatus.toUpperCase());
+      renderAll();
+    }
+
+    function handleSaveSettings(e) {
+      e.preventDefault();
+      state.settings.leftPerson = document.getElementById('set-left-person').value.trim() || 'MANSOOR';
+      state.settings.rightPerson = document.getElementById('set-right-person').value.trim() || 'SUNIL';
+      state.settings.leftBrand = document.getElementById('set-left-brand').value.trim() || 'SULTAN SPORTS';
+      state.settings.rightBrand = document.getElementById('set-right-brand').value.trim() || 'NR SPORTS';
+      state.settings.feeRupees = Number(document.getElementById('set-fee').value) || 399;
+      state.settings.upiId = document.getElementById('set-upi').value.trim() || 'sultansports.tkpl@upi';
+      showToast('Updated Organizer Names, Brands & Fee!');
+      renderAll();
+    }
+
+    function exportAuctionCsv() {
+      const eligible = state.players.filter(p => p.auctionStatus === 'eligible');
+      const csv = ['ID,Name,Phone,Locality,Role,UTR', ...eligible.map(p => `${p.id},"${p.name}",${p.phone},"${p.locality}","${p.role}",${p.utr}`)].join('\n');
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'TKPL_Auction_Pool.csv';
+      a.click();
+    }
+
+    function renderAll() {
+      document.getElementById('ui-left-person').textContent = state.settings.leftPerson;
+      document.getElementById('ui-right-person').textContent = state.settings.rightPerson;
+      document.getElementById('ui-left-brand').textContent = state.settings.leftBrand;
+      document.getElementById('ui-right-brand').textContent = state.settings.rightBrand;
+      document.getElementById('ui-left-photo').src = state.settings.leftPhoto;
+      document.getElementById('ui-right-photo').src = state.settings.rightPhoto;
+
+      document.getElementById('ui-hero-fee').textContent = '₹' + state.settings.feeRupees + '/-';
+      document.getElementById('ui-form-fee').textContent = '₹' + state.settings.feeRupees + '/-';
+      document.getElementById('ui-form-upi').textContent = state.settings.upiId;
+
+      document.getElementById('set-left-person').value = state.settings.leftPerson;
+      document.getElementById('set-right-person').value = state.settings.rightPerson;
+      document.getElementById('set-left-brand').value = state.settings.leftBrand;
+      document.getElementById('set-right-brand').value = state.settings.rightBrand;
+      document.getElementById('set-fee').value = state.settings.feeRupees;
+      document.getElementById('set-upi').value = state.settings.upiId;
+
+      const eligibleCount = state.players.filter(p => p.auctionStatus === 'eligible').length;
+      document.getElementById('kpi-total').textContent = state.players.length;
+      document.getElementById('kpi-approved').textContent = state.players.filter(p => p.regStatus === 'approved').length;
+      document.getElementById('kpi-verified-pay').textContent = state.players.filter(p => p.payStatus === 'verified').length;
+      document.getElementById('kpi-eligible').textContent = eligibleCount;
+
+      document.getElementById('admin-players-list').innerHTML = state.players.map(p => `
+        <div class="rounded-2xl border border-zinc-800 bg-zinc-900 p-4 space-y-2.5">
+          <div class="flex items-start justify-between">
+            <div>
+              <span class="font-mono text-xs font-black text-yellow-300">${p.id}</span>
+              <h3 class="text-base font-black text-white">${p.name}</h3>
+              <p class="text-xs text-zinc-400">${p.locality} · <strong class="text-lime-300">${p.role}</strong></p>
+            </div>
+            <span class="rounded-lg px-2.5 py-1 text-[10px] font-black uppercase ${p.auctionStatus === 'eligible' ? 'bg-lime-400 text-zinc-950' : 'bg-zinc-800 text-zinc-400'}">
+              ${p.auctionStatus === 'eligible' ? '★ Auction Eligible' : 'Pending Pool'}
+            </span>
+          </div>
+          <div class="flex gap-2 pt-1">
+            <button onclick="adminSetPlayerStatus('${p.id}','approved','eligible')" class="rounded-xl bg-lime-400 px-3 py-1.5 text-xs font-black text-zinc-950">✓ Approve for Auction</button>
+            <button onclick="adminSetPlayerStatus('${p.id}','rejected','ineligible')" class="rounded-xl border border-rose-500/50 bg-rose-500/10 px-3 py-1.5 text-xs font-bold text-rose-300">Reject</button>
+          </div>
+        </div>
+      `).join('');
+
+      document.getElementById('admin-payments-list').innerHTML = state.players.map(p => `
+        <div class="rounded-2xl border border-zinc-800 bg-zinc-900 p-4 flex items-center justify-between gap-2">
+          <div>
+            <span class="font-mono text-xs font-black text-amber-300">${p.id} · ₹${state.settings.feeRupees}</span>
+            <h3 class="text-sm font-black text-white">${p.name}</h3>
+            <p class="font-mono text-xs text-zinc-400">UTR: <strong class="text-white">${p.utr || 'Pending'}</strong> (${p.payStatus})</p>
+          </div>
+          <button onclick="adminSetPaymentStatus('${p.id}','verified')" class="rounded-xl bg-yellow-400 px-3 py-2 text-xs font-black text-zinc-950 shrink-0">
+            ✓ Verify ₹${state.settings.feeRupees}
+          </button>
+        </div>
+      `).join('');
+    }
+
+    showScreen('home');
+    showAdminSubTab('players');
+  </script>
+</body>
+</html>
